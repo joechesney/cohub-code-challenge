@@ -6,6 +6,7 @@ import YearsExperience from "./YearsExperience.js";
 import GoodDev from "./GoodDev.js";
 import FaveLanguage from "./FaveLanguage.js";
 import OtherLanguages from "./OtherLanguages.js";
+import FullName from "./FullName.js";
 import fastdb from './db-fast.json';
 
 console.log(fastdb);
@@ -56,6 +57,7 @@ const questions = fastdb.questions.map(question => {
         />
       </div>
     );
+  
 });
 export default class App extends React.Component {
   
@@ -71,7 +73,7 @@ export default class App extends React.Component {
           }}
         </Query> */}
         
-        <ul>{questions}</ul>
+        <ul>{<div><FullName /></div>}{questions}</ul>
         
       </div>
     );
