@@ -27,9 +27,8 @@ const styles = theme => ({
 
 class FaveLanguage extends React.Component {
   state = {
-    age: '',
-    name: 'hai',
-    labelWidth: 0
+    labelWidth: 0,
+    faveLanguage: ''
   };
 
   componentDidMount() {
@@ -39,8 +38,9 @@ class FaveLanguage extends React.Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+      this.setState({ [event.target.name]: event.target.value});
+      console.log(this.state);
+    };
 
   render() {
     const { classes } = this.props;
@@ -58,12 +58,12 @@ class FaveLanguage extends React.Component {
             Favorite Language
           </InputLabel>
           <Select
-            value={this.state.age}
+            value={this.state.faveLanguage}
             onChange={this.handleChange}
             input={
               <OutlinedInput
                 labelWidth={this.state.labelWidth}
-                name="age"
+                name="faveLanguage"
                 id="outlined-age-simple"
               />
             }
@@ -73,11 +73,9 @@ class FaveLanguage extends React.Component {
             </MenuItem>
             {
                 languages.map(lang => (
-                    <MenuItem key={lang} value={lang}>{lang}</MenuItem>
-
+                    <MenuItem key={lang} value={lang} >{lang}</MenuItem>
                 ))
             }
-
           </Select>
         </FormControl>
 
