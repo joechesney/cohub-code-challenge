@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
@@ -14,7 +13,7 @@ const styles = theme => ({
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        width: 200,
+        // width: 200,
     },
     dense: {
         marginTop: 19,
@@ -24,31 +23,13 @@ const styles = theme => ({
     },
 });
 
-const currencies = [
-    {
-        value: 'USD',
-        label: '$',
-    },
-    {
-        value: 'EUR',
-        label: '€',
-    },
-    {
-        value: 'BTC',
-        label: '฿',
-    },
-    {
-        value: 'JPY',
-        label: '¥',
-    },
-];
-
-class TextFields extends React.Component {
+class YearsExperience extends React.Component {
     state = {
         name,
         age: '',
         multiline: 'Controlled',
         currency: 'EUR',
+        label: this.props.label
     };
 
     handleChange = name => event => {
@@ -63,22 +44,27 @@ class TextFields extends React.Component {
         return (
             <form className={classes.container} noValidate autoComplete="off">
                 <TextField
+                    required
+                    fullWidth
+                    style={{ margin: 8 }}
                     id="standard-name"
-                    label="Name"
+                    label={this.state.label}
                     className={classes.textField}
                     value={this.state.name}
                     onChange={this.handleChange('name')}
                     margin="normal"
+                    variant="outlined"
+                    
                 />
-                
+
             </form>
         );
     }
 }
 
-TextFields.propTypes = {
+YearsExperience.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TextFields);
+export default withStyles(styles)(YearsExperience);
 
