@@ -1,0 +1,33 @@
+{
+    "questions": [
+        { 
+            "field_type": "string",
+            "id": "1",
+            "label": "How many years have you been developing software?",
+            "multiselect": false,
+            "options": []
+        },
+        {
+            "field_type": "boolean",
+            "id": "2",
+            "label": "Are you a good developer?",
+            "multiselect": false,
+            "options": []
+
+        },
+        {
+            "field_type": "list",
+            "id": "3",
+            "label": "What is your favorite programming language?",
+            "multiselect": false,
+            "options": ["Ruby", "Javascript", "C#", "C++", "Java", "Objective-C", "Swift", "Go", "Python", "Cobol", "Fortran"]
+        },
+        {
+            "field_type": "list",
+            "id": "4",
+            "label": "Select two or three of your second favorite programming languages:",
+            "multiselect": true,
+            "options":  ["Ruby", "Javascript", "C#", "C++", "Java", "Objective-C", "Swift", "Go", "Python", "Cobol", "Fortran"]
+        }
+    ]
+}
