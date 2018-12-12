@@ -8,7 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import TextFields from "./TextFields.js";
+import YearsExperience from "./YearsExperience.js";
 import fastdb from './db-fast.json';
 
 console.log(fastdb);
@@ -26,39 +26,30 @@ const inlineStyle = {
 const questions = fastdb.questions.map(question => {
   if (question.field_type === "string")
     return (
-      <div key={question.id} style={inlineStyle}>
-        {question.label}
-        <TextFields
-          required
-          multiline
-
+      <div key={question.id} >
+        <YearsExperience
           id={question.label}
-          // label={question.label}
-          // className={classes.textField}
-          value=""
-          // onChange={this.handleChange('name')}
-          margin="none"
-          variant="outlined"
+          label={question.label}
         />
       </div>
     );
-  else if (question.field_type === "boolean")
-    return (
-      <div key={question.id} style={inlineStyle}>
-        <TextFields
-          required
-          multiline
+  // else if (question.field_type === "boolean")
+  //   return (
+  //     <div key={question.id} style={inlineStyle}>
+  //       <TextFields
+  //         required
+  //         multiline
 
-          id={question.label}
-          // label={question.label}
-          // className={classes.textField}
-          value=""
-          // onChange={this.handleChange('name')}
-          margin="none"
-          variant="outlined"
-        />
-      </div>
-    );
+  //         id={question.label}
+  //         // label={question.label}
+  //         // className={classes.textField}
+  //         value=""
+  //         // onChange={this.handleChange('name')}
+  //         margin="none"
+  //         variant="outlined"
+  //       />
+  //     </div>
+  //   );
 });
 export default class App extends React.Component {
   
@@ -74,7 +65,7 @@ export default class App extends React.Component {
           }}
         </Query> */}
         
-        <ul>{questions}</ul>;
+        <ul>{questions}</ul>
         
       </div>
     );
