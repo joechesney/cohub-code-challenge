@@ -9,6 +9,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import YearsExperience from "./YearsExperience.js";
+import GoodDev from "./GoodDev.js";
 import fastdb from './db-fast.json';
 
 console.log(fastdb);
@@ -33,23 +34,14 @@ const questions = fastdb.questions.map(question => {
         />
       </div>
     );
-  // else if (question.field_type === "boolean")
-  //   return (
-  //     <div key={question.id} style={inlineStyle}>
-  //       <TextFields
-  //         required
-  //         multiline
-
-  //         id={question.label}
-  //         // label={question.label}
-  //         // className={classes.textField}
-  //         value=""
-  //         // onChange={this.handleChange('name')}
-  //         margin="none"
-  //         variant="outlined"
-  //       />
-  //     </div>
-  //   );
+  else if (question.field_type === "boolean")
+    return (
+      <div key={question.id} style={inlineStyle}>
+        <GoodDev
+          id={question.label}
+        />
+      </div>
+    );
 });
 export default class App extends React.Component {
   
