@@ -2,14 +2,9 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import YearsExperience from "./YearsExperience.js";
 import GoodDev from "./GoodDev.js";
+import FaveLanguage from "./FaveLanguage.js";
 import fastdb from './db-fast.json';
 
 console.log(fastdb);
@@ -38,6 +33,15 @@ const questions = fastdb.questions.map(question => {
     return (
       <div key={question.id} style={inlineStyle}>
         <GoodDev
+          id={question.label}
+        />
+      </div>
+    );
+  else if (question.field_type === "list" && question.multiselect === false)
+    return (
+      <div key={question.id} style={inlineStyle}>
+        <FaveLanguage
+          languages={question.options}
           id={question.label}
         />
       </div>
