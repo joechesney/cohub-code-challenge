@@ -5,6 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import YearsExperience from "./YearsExperience.js";
 import GoodDev from "./GoodDev.js";
 import FaveLanguage from "./FaveLanguage.js";
+import OtherLanguages from "./OtherLanguages.js";
 import fastdb from './db-fast.json';
 
 console.log(fastdb);
@@ -41,6 +42,15 @@ const questions = fastdb.questions.map(question => {
     return (
       <div key={question.id} style={inlineStyle}>
         <FaveLanguage
+          languages={question.options}
+          id={question.label}
+        />
+      </div>
+    );
+  else if (question.field_type === "list" && question.multiselect === true)
+    return (
+      <div key={question.id} style={inlineStyle}>
+        <OtherLanguages
           languages={question.options}
           id={question.label}
         />
