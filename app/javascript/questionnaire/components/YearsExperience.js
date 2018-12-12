@@ -1,7 +1,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
@@ -13,14 +12,7 @@ const styles = theme => ({
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        // width: 200,
-    },
-    dense: {
-        marginTop: 19,
-    },
-    menu: {
-        width: 200,
-    },
+    }
 });
 
 class YearsExperience extends React.Component {
@@ -40,7 +32,7 @@ class YearsExperience extends React.Component {
 
     render() {
         const { classes } = this.props;
-
+        console.log(classes)
         return (
             <form className={classes.container} noValidate autoComplete="off">
                 <TextField
@@ -54,9 +46,7 @@ class YearsExperience extends React.Component {
                     onChange={this.handleChange('name')}
                     margin="normal"
                     variant="outlined"
-                    
                 />
-
             </form>
         );
     }
@@ -66,5 +56,9 @@ YearsExperience.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
+// withStyles is a method of the MaterialUI library that passes 
+// 'styles' in as 'props' to 'YearsExperience'. That's how the 
+// component has access to that variable even though it looks
+// like it shouldn't have access to it
 export default withStyles(styles)(YearsExperience);
 
