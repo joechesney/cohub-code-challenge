@@ -10,43 +10,10 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
-  },
-});
-
-class FaveLanguage extends React.Component {
-  constructor(props){
-    super(props); 
-    this.state = {
-      labelWidth: 0,
-    //   faveLanguage: this.props.faveLanguage,
-    };
-    // this.handleChange = this.handleChange.bind(this)
-  }
-
-  componentDidMount() {
-    this.setState({
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
-    });
-  }
-
-  render() {
-    const { classes } = this.props;
-    const { languages } = this.props;
-    return (
-      <form className={classes.root} autoComplete="off">
+const FaveLanguage2 = props => (
+    <form  autoComplete="off">
         
-        <FormControl variant="outlined" className={classes.formControl}>
+        <FormControl variant="outlined" >
           <InputLabel
             ref={ref => {
               this.InputLabelRef = ref;
@@ -56,13 +23,13 @@ class FaveLanguage extends React.Component {
             Favorite Language
           </InputLabel>
           <Select
-            value={this.props.faveLanguage}
-            onChange={this.props.handleChange}
+            value={props.faveLanguage}
+            // onChange={this.handleChange}
             name="faveLanguage"
 
             input={
               <OutlinedInput
-                labelWidth={this.state.labelWidth}
+                labelWidth={0}
                 name="faveLanguage"
                 id="faveLanguageInput"
               />    
@@ -72,7 +39,7 @@ class FaveLanguage extends React.Component {
               <em>None</em>
             </MenuItem>
             {
-                languages.map(lang => (
+                props.languages.map(lang => (
                     <MenuItem key={lang} value={lang} >{lang}</MenuItem>
                 ))
             }
@@ -80,9 +47,6 @@ class FaveLanguage extends React.Component {
         </FormControl>
 
       </form>
-    );
-  }
-}
+)
 
-
-export default withStyles(styles)(FaveLanguage);
+export default FaveLanguage2;

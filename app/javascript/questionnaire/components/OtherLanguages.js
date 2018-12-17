@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -20,21 +19,36 @@ const styles = theme => ({
 class OtherLanguages extends React.Component {
   constructor(props){
     super(props);
-    // this.props.languages.map( lang => (this.setState({[lang]: false})));
     
     this.state = {
-        languages: this.props.languages
+        languages: this.props.languages,
+        langBools:{}
     };
-    this.props.languages.map( lang => (this.state[lang] = false));
+    this.props.languages.map( lang => (this.state.langBools[lang] = false));
   };
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
-};
+    const newLangBools = this.state.langBools;
+    newLangBools[name] = event.target.checked;
+    
+    this.setState(prevState => {
+      return {
+        langBools: newLangBools,
+        ...prevState
+      }
+    });
 
-componentDidMount(){
-}
-componentDidUpdate(){
+    console.log("current state in OtherLangugges", this.state)
+
+    let arrayOfOtherFaveLanguages = this.state.languages.filter(lang => {
+      if(this.state.langBools[lang] === true) return lang;
+    });
+    
+    console.log("arrayOfOtherFaveLanguages: ", arrayOfOtherFaveLanguages)
+    this.props.handleChange({target: {value: arrayOfOtherFaveLanguages, name: event.target.name}})
+  };
+
+  componentDidUpdate(){
     console.log("on update:", this.state)
     
   }
@@ -53,7 +67,7 @@ componentDidUpdate(){
                 <FormControlLabel
                   key={lang}
                   control={
-                    <Checkbox checked={this.state[lang]} onChange={this.handleChange(lang)} value={lang} />
+                    <Checkbox name='otherFaveLanguages' checked={this.state.langBools[lang]} onChange={this.handleChange(lang)} value={lang} />
                   }
                   label={lang}
                 />
@@ -68,8 +82,5 @@ componentDidUpdate(){
   }
 }
 
-OtherLanguages.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(OtherLanguages);
