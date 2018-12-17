@@ -1,6 +1,5 @@
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
@@ -16,13 +15,13 @@ const styles = theme => ({
 });
 
 class FullName extends React.Component {
-    state = {
-        name,
-        age: '',
-        multiline: 'Controlled',
-        currency: 'EUR',
-        label: this.props.label
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+            name: props.userName
+        };
+
+    }
 
     handleChange = name => event => {
         this.setState({
@@ -35,7 +34,7 @@ class FullName extends React.Component {
         return (
             <form className={classes.container} noValidate autoComplete="off">
                 <TextField
-                    required
+                    // required
                     fullWidth
                     style={{ margin: 8 }}
                     id="standard-name"
@@ -51,9 +50,6 @@ class FullName extends React.Component {
     }
 }
 
-FullName.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 // withStyles is a method of the MaterialUI library that passes 
 // 'styles' in as 'props' to 'FullName'. That's how the 

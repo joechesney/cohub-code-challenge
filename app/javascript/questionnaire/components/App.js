@@ -1,85 +1,49 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import YearsExperience from "./YearsExperience.js";
-import GoodDev from "./GoodDev.js";
-import FaveLanguage from "./FaveLanguage.js";
-import OtherLanguages from "./OtherLanguages.js";
-import FullName from "./FullName.js";
-import fastdb from './db-fast.json';
-
-console.log(fastdb);
+import Questionnaire from './Questionnaire';
+import Admin from './Admin'
 
 
-// const questions = data.questions.map(question => (
-//   <li key={question.id}>
-//     <label htmlFor={question.id}>{question.label}</label>
-//     <input name={question.id} type={question.field_type}></input>
-//   </li>
-// ));
-const inlineStyle = {
-  display: "block"
-};
-const questions = fastdb.questions.map(question => {
-  if (question.field_type === "string")
-    return (
-      <div key={question.id} >
-        <YearsExperience
-          id={question.label}
-          label={question.label}
-        />
-      </div>
-    );
-  else if (question.field_type === "boolean")
-    return (
-      <div key={question.id} style={inlineStyle}>
-        <GoodDev
-          id={question.label}
-        />
-      </div>
-    );
-  else if (question.field_type === "list" && question.multiselect === false)
-    return (
-      <div key={question.id} style={inlineStyle}>
-        <FaveLanguage
-          languages={question.options}
-          id={question.label}
-        />
-      </div>
-    );
-  else if (question.field_type === "list" && question.multiselect === true)
-    return (
-      <div key={question.id} style={inlineStyle}>
-        <OtherLanguages
-          languages={question.options}
-          id={question.label}
-        />
-      </div>
-    );
-  
-});
 export default class App extends React.Component {
   
+
+  componentDidUpdate(prevProps, prevState){
+    if(this.state !== prevState){
+      console.log("App state", this.state);
+    }
+  }
+
   render() {
     return (
       <div>
         <CssBaseline />
-        {/* <Query query={LIST_QUESTIONS}>
-          {({ loading, error, data }) => {
-            if (loading) return <div>Loading..</div>;
-            if (error) return `Error! ${error.message}`;
-            
-          }}
-        </Query> */}
+        <Router>
+          <div>
+            <Header />
+
+            <Route path="/questionnaire" component={Questionnaire} />
+            <Route path="/admin" component={Admin} />
+          </div>
+        </Router>
         
-        <ul>{<div><FullName /></div>}{questions}</ul>
         
       </div>
     );
   }
 }
-
+const Header = () => (
+  <ul>
+    <li>
+      <Link to="/questionnaire">Questionnaire</Link>
+    </li>
+    <li>
+      <Link to="/admin">Admin</Link>
+    </li>
+  </ul>
+);
 const LIST_QUESTIONS = gql`
   query ListQuestions {
     questions: ListQuestions {
