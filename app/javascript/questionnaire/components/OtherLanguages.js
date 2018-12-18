@@ -37,21 +37,11 @@ class OtherLanguages extends React.Component {
         ...prevState
       }
     });
-
-    console.log("current state in OtherLangugges", this.state)
-
     let arrayOfOtherFaveLanguages = this.state.languages.filter(lang => {
       if(this.state.langBools[lang] === true) return lang;
     });
-    
-    console.log("arrayOfOtherFaveLanguages: ", arrayOfOtherFaveLanguages)
     this.props.handleChange({target: {value: arrayOfOtherFaveLanguages, name: event.target.name}})
   };
-
-  componentDidUpdate(){
-    console.log("on update:", this.state)
-    
-  }
 
   render() {
     const { classes } = this.props;

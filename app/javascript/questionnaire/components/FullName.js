@@ -32,7 +32,6 @@ class FullName extends React.Component {
     render() {
         const { classes } = this.props;
         return (
-            <form className={classes.container} noValidate autoComplete="off">
                 <TextField
                     // required
                     fullWidth
@@ -46,7 +45,6 @@ class FullName extends React.Component {
                     variant="outlined"
                     name="fullName"
                 />
-            </form>
         );
     }
 }
