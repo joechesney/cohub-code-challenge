@@ -32,6 +32,12 @@ class FaveLanguage extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.setState({
+      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+    });
+  }
+
   render() {
     const { classes } = this.props;
     const { languages } = this.props;
@@ -69,7 +75,6 @@ class FaveLanguage extends React.Component {
             }
           </Select>
         </FormControl>
-
       </form>
     );
   }
