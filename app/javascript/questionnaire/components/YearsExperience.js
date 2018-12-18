@@ -26,7 +26,6 @@ class YearsExperience extends React.Component {
     render() {
         const { classes } = this.props;
         return (
-            <form className={classes.container} noValidate autoComplete="off">
                 <TextField
                     // required
                     fullWidth
@@ -40,7 +39,6 @@ class YearsExperience extends React.Component {
                     variant="outlined"
                     name="yearsOfExperience"
                 />
-            </form>
         );
     }
 }

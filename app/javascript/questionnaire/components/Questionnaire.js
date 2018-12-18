@@ -7,7 +7,26 @@ import GoodDevQ from "./GoodDevQ.js";
 import FaveLanguage from "./FaveLanguage.js";
 import OtherLanguages from "./OtherLanguages.js";
 import FullName from "./FullName.js";
-import fastdb from './db-fast.json';
+import SubmitButton from './SubmitButton.js';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: 250,
+    },
+    dense: {
+      marginTop: 19,
+    },
+    menu: {
+      width: 200,
+    },
+  });
 
 
 const inlineStyle = {
@@ -15,8 +34,8 @@ const inlineStyle = {
 };
 
 class Questionnaire extends React.Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       faveLanguage: '',
       otherFaveLanguages: [],
@@ -25,6 +44,7 @@ class Questionnaire extends React.Component {
       isGoodDev: ""
     }
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -34,10 +54,16 @@ class Questionnaire extends React.Component {
   }
 
   handleChange = event => {
+    console.log("state changed");
     this.setState({ [event.target.name]: event.target.value});
   };
 
+  handleSubmit = event => {
+      console.log("submitted!", event);
+  }
+
   render() {
+    const { classes } = this.props;
     return (
       <div>
         <CssBaseline />
@@ -45,7 +71,7 @@ class Questionnaire extends React.Component {
           {({ loading, error, data }) => {
             if (loading) return <div>Loading..</div>;
             if (error) return `Error! ${error.message}`;
-            const questions = fastdb.questions.map(question => {
+            const questions = data.questions.map(question => {
               if (question.field_type === "string")
                 return (
                   <div key={question.id} >
@@ -92,9 +118,9 @@ class Questionnaire extends React.Component {
                     />
                   </div>
                 );
-              
             });
             return (
+                <form className={classes.container} noValidate autoComplete="off">
                 <ul>
                     <div>
                         <FullName 
@@ -104,12 +130,14 @@ class Questionnaire extends React.Component {
                         />
                     </div>
                     {questions}
+                    <SubmitButton
+                        onClick={this.handleSubmit}
+                    />
                 </ul>
+                </form>
                 )
           }}
         </Query>
-        
-        
       </div>
     );
   }
@@ -127,4 +155,4 @@ const LIST_QUESTIONS = gql`
     }
   }
 `;
-export default (Questionnaire);
+export default withStyles(styles)(Questionnaire);

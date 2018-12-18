@@ -37,9 +37,7 @@ class GoodDevQ extends React.Component {
 
   render() {
     const { classes } = this.props;
-
     return (
-      <form className={classes.container} noValidate autoComplete="off">
 
         <FormControl component="fieldset" className={classes.formControl}>
           <FormLabel component="legend">{this.props.label}</FormLabel>
@@ -66,7 +64,6 @@ class GoodDevQ extends React.Component {
           </RadioGroup>
           {/* <FormHelperText>labelPlacement start</FormHelperText> */}
         </FormControl>
-      </form>
     );
   }
 }
