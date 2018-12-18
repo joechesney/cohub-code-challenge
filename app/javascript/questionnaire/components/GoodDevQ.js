@@ -42,29 +42,29 @@ class GoodDevQ extends React.Component {
       <form className={classes.container} noValidate autoComplete="off">
 
         <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">Are you a good developer?</FormLabel>
+          <FormLabel component="legend">{this.props.label}</FormLabel>
           <RadioGroup
-            aria-label="gender"
-            name="gender2"
+            aria-label="isGoodDev"
+            name="isGoodDev"
             className={classes.group}
-            value={this.state.value}
-            onChange={this.handleChange}
+            value={this.props.isGoodDev}
+            onChange={this.props.handleChange}
           >
             <FormControlLabel
-              value="no"
+              value="false"
               control={<Radio color="primary" />}
               label="No"
               labelPlacement="start"
             />
             <FormControlLabel
-              value="yes"
+              value="true"
               control={<Radio color="primary" />}
               label="Yes"
               labelPlacement="start"
             />
 
           </RadioGroup>
-          <FormHelperText>labelPlacement start</FormHelperText>
+          {/* <FormHelperText>labelPlacement start</FormHelperText> */}
         </FormControl>
       </form>
     );

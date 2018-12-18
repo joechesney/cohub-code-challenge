@@ -29,15 +29,7 @@ class FaveLanguage extends React.Component {
     super(props); 
     this.state = {
       labelWidth: 0,
-    //   faveLanguage: this.props.faveLanguage,
     };
-    // this.handleChange = this.handleChange.bind(this)
-  }
-
-  componentDidMount() {
-    this.setState({
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
-    });
   }
 
   render() {
@@ -59,7 +51,6 @@ class FaveLanguage extends React.Component {
             value={this.props.faveLanguage}
             onChange={this.props.handleChange}
             name="faveLanguage"
-
             input={
               <OutlinedInput
                 labelWidth={this.state.labelWidth}
