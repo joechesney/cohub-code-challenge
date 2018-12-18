@@ -15,13 +15,12 @@ const styles = theme => ({
 });
 
 class YearsExperience extends React.Component {
-    state = {
-        name,
-        age: '',
-        multiline: 'Controlled',
-        currency: 'EUR',
-        label: this.props.label
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+    
+        };
+    }
 
 
     render() {
@@ -33,12 +32,13 @@ class YearsExperience extends React.Component {
                     fullWidth
                     style={{ margin: 8 }}
                     id="standard-name"
-                    label={this.state.label}
+                    label={this.props.label}
                     className={classes.textField}
-                    value={this.state.name}
+                    value={this.props.yearsOfExperience}
                     onChange={this.props.handleChange}
                     margin="normal"
                     variant="outlined"
+                    name="yearsOfExperience"
                 />
             </form>
         );
