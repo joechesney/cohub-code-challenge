@@ -18,16 +18,16 @@ class FullName extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            name: props.userName
+            
         };
 
     }
 
-    handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-        });
-    };
+    // handleChange = name => event => {
+    //     this.setState({
+    //         [name]: event.target.value,
+    //     });
+    // };
 
     render() {
         const { classes } = this.props;
@@ -38,12 +38,13 @@ class FullName extends React.Component {
                     fullWidth
                     style={{ margin: 8 }}
                     id="standard-name"
-                    label={this.state.label}
+                    label={this.props.label}
                     className={classes.textField}
-                    value={this.state.name}
-                    onChange={this.handleChange('name')}
+                    value={this.props.fullName}
+                    onChange={this.props.handleChange}
                     margin="normal"
                     variant="outlined"
+                    name="fullName"
                 />
             </form>
         );

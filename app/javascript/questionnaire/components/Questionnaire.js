@@ -20,7 +20,7 @@ class Questionnaire extends React.Component {
     this.state = {
       faveLanguage: '',
       otherFaveLanguages: [],
-      userName: '',
+      fullName: '',
       yearsOfExperience: '',
       isGoodDev: ""
     }
@@ -64,6 +64,7 @@ class Questionnaire extends React.Component {
                   <div key={question.id} style={inlineStyle}>
                     <GoodDevQ
                       id={question.label}
+                      label={question.label}
                       isGoodDev={this.state.isGoodDev}
                       handleChange={this.handleChange}
                     />
@@ -75,6 +76,7 @@ class Questionnaire extends React.Component {
                     <FaveLanguage
                       languages={question.options}
                       id={question.label}
+                      label={question.label}
                       faveLanguage={this.state.faveLanguage}
                       handleChange={this.handleChange}
                     />
@@ -88,12 +90,24 @@ class Questionnaire extends React.Component {
                       languages={question.options}
                       id={question.label}
                       handleChange={this.handleChange}
+                      label={question.label}
                     />
                   </div>
                 );
               
             });
-            return <ul>{<div><FullName /></div>}{questions}</ul>
+            return (
+                <ul>
+                    <div>
+                        <FullName 
+                        handleChange={this.handleChange}
+                        fullName={this.state.fullName}
+                        label={"What is your full name?"}
+                        />
+                    </div>
+                    {questions}
+                </ul>
+                )
           }}
         </Query>
         
