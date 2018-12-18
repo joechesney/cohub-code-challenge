@@ -28,14 +28,12 @@ class Questionnaire extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    console.log("state changed in Questionnaire")
     if(this.state !== prevState){
       console.log("App state", this.state);
     }
   }
 
   handleChange = event => {
-    console.log("change handled in Questionnaire. event:", event)
     this.setState({ [event.target.name]: event.target.value});
     console.log("inside Questionnaire: ", this.state);
   };
@@ -56,6 +54,7 @@ class Questionnaire extends React.Component {
                       id={question.label}
                       label={question.label}
                       yearsOfExperience={this.state.yearsOfExperience}
+                      handleChange={this.handleChange}
                     />
                   </div>
                 );
