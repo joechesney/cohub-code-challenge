@@ -9,7 +9,6 @@ import Admin from './Admin'
 
 export default class App extends React.Component {
   
-
   componentDidUpdate(prevProps, prevState){
     if(this.state !== prevState){
       console.log("App state", this.state);
@@ -17,7 +16,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props; 
     return (
       <div>
         <CssBaseline />

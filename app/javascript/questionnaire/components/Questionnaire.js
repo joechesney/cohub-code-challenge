@@ -60,6 +60,7 @@ class Questionnaire extends React.Component {
 
   handleSubmit = event => {
       console.log("submitted!", event);
+      
   }
 
   render() {
