@@ -9,6 +9,7 @@ import OtherLanguages from "./OtherLanguages.js";
 import FullName from "./FullName.js";
 import SubmitButton from './SubmitButton.js';
 import { withStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 const styles = theme => ({
     container: {
@@ -59,8 +60,17 @@ class Questionnaire extends React.Component {
   };
 
   handleSubmit = event => {
-      console.log("submitted!", event);
-      
+      console.log("submitted!", this.state);
+      var headers = {
+        "Content-Type": "application/json",
+        // "Accept": "application/json"
+    }
+    axios.post(`http://localhost:3000/questionnaire`, this.state, {headers: headers})
+    .then(res => {
+    console.log(res);
+    console.log(res.data);
+    })
+
   }
 
   render() {
