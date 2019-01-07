@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { withStyles } from '@material-ui/core/styles';
-import Entry from './Entry';
+import EntriesTable from './EntriesTable';
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
-import axios from 'axios';
-
-
 
 
 const styles = theme => ({
@@ -28,8 +25,8 @@ class Admin extends React.Component {
     super(props); 
     this.state = {
       labelWidth: 0,
-      authorized: false,
-      allEntries: []
+      allEntries: [],
+      authorized: true
     };
 
   }
@@ -49,36 +46,38 @@ class Admin extends React.Component {
   render() {
     const { classes } = this.props;
     const { languages } = this.props;
-    return (
-      <div>
-        <Query query={LIST_ENTRIES}>
-        {({ loading, error, data }) => {
-            if (loading) return <div>Loading..</div>;
-            if (error) return `Error! ${error.message}`;
-            console.log("entries", data.entries);
-            // const entries = data.entries.map
-          }
-        }
-        </Query>
-        <Entry 
-
-        />
-      </div>
-    );
+    if(!this.state.authorized){
+      return <div>You are not authorized to view this page!</div>
+    }else{
+      return (
+        <div>
+            <Query query={LIST_ENTRIES}>
+            {({ loading, error, data }) => {
+                if (loading) return <div>Loading..</div>;
+                if (error) return `Error! ${error.message}`;
+                console.log("entries", data.entries);
+                return <EntriesTable entries={data.entries}/>
+              }
+            }
+            </Query>
+        </div>
+      );
+    }
   }
 }
 
 const LIST_ENTRIES = gql`
-  query ListEntries {
-    entries: ListEntries {
-      id
-      full_name
-      years_experience
-      good_developer
-      favorite_language
-      other_favorites
-    }
-  }
-`;
+        query ListEntries {
+            entries: ListEntries {
+                id
+                full_name
+                years_experience
+                good_developer
+                favorite_language
+                other_favorites
+            }
+        }
+    `;
+
 
 export default withStyles(styles)(Admin);
