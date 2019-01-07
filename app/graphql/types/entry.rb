@@ -1,4 +1,4 @@
-Types::Question = GraphQL::ObjectType.define do
+Types::Entry = GraphQL::ObjectType.define do
     name 'Entry'
   
     field :id, types.ID
@@ -6,6 +6,6 @@ Types::Question = GraphQL::ObjectType.define do
     field :years_experience, types.String
     field :good_developer, types.Boolean
     field :favorite_language, types.String
-    field :other_favorites, [types.Text]
+    field :other_favorites, types[types.String]
   end
   
