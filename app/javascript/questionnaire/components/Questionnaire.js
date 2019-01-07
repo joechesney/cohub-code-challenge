@@ -67,8 +67,8 @@ class Questionnaire extends React.Component {
     }
     axios.post(`http://localhost:3000/questionnaire`, this.state, {headers: headers})
     .then(res => {
-    console.log(res);
-    console.log(res.data);
+      console.log(res);
+      console.log(res.data);
     })
 
   }
