@@ -60,17 +60,14 @@ class Questionnaire extends React.Component {
   };
 
   handleSubmit = event => {
-      console.log("submitted!", this.state);
-      var headers = {
-        "Content-Type": "application/json",
-        // "Accept": "application/json"
+    console.log("submitted!", this.state);
+    var headers = {
+      "Content-Type": "application/json"
     }
     axios.post(`http://localhost:3000/questionnaire`, this.state, {headers: headers})
     .then(res => {
-      console.log(res);
-      console.log(res.data);
+      // tell user whether their form was successfully submitted or not
     })
-
   }
 
   render() {
@@ -133,17 +130,17 @@ class Questionnaire extends React.Component {
             return (
                 <form className={classes.container} noValidate autoComplete="off">
                 <ul>
-                    <div>
-                        <FullName 
-                        handleChange={this.handleChange}
-                        fullName={this.state.fullName}
-                        label={"What is your full name?"}
-                        />
-                    </div>
-                    {questions}
-                    <SubmitButton
-                        onClick={this.handleSubmit}
-                    />
+                  <div>
+                  <FullName 
+                  handleChange={this.handleChange}
+                  fullName={this.state.fullName}
+                  label={"What is your full name?"}
+                  />
+                  </div>
+                  {questions}
+                  <SubmitButton
+                      onClick={this.handleSubmit}
+                  />
                 </ul>
                 </form>
                 )
