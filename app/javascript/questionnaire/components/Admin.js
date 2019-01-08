@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import EntriesTable from './EntriesTable';
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import AuthForm from './AuthForm';
+import axios from 'axios';
 
 
 const styles = theme => ({
@@ -26,20 +28,42 @@ class Admin extends React.Component {
     this.state = {
       labelWidth: 0,
       allEntries: [],
-      authorized: true
+      authorized: false,
+      username: "",
+      password: "",
+      warning: false
     };
-
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    // make ajax call to graphql to get all entries
-    // add those entries ot the state
-    
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value});
+  };
 
-    this.setState({
-      // labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+  handleSubmit = event => {
+    console.log("submitted!", this.state);
+    var headers = {
+      "Content-Type": "application/json"
+    }
+    axios.post(
+      `http://localhost:3000/admin`, 
+      {
+        username: this.state.username,
+        password: this.state.password
+      }, 
+      {headers: headers})
+    .then(res => {
+      console.log("res", res);
+      if(res.data.authorized){
+        this.setState({authorized: true})
+      } else {
+        this.setState({warning: true})
+        console.log("not authorized!", this.state)
+      }
+      // tell user whether their form was successfully submitted or not
     });
-  }
+}
 
 
 
@@ -47,7 +71,18 @@ class Admin extends React.Component {
     const { classes } = this.props;
     const { languages } = this.props;
     if(!this.state.authorized){
-      return <div>You are not authorized to view this page!</div>
+      return (
+        <div>
+          <div>You must be authorized to view this page!</div>
+          <AuthForm 
+            username={this.state.username} 
+            password={this.state.password}  
+            onClick={this.handleSubmit}
+            onChange={this.handleChange}
+          />
+
+        </div>
+      )
     }else{
       return (
         <div>
