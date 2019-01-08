@@ -6,6 +6,8 @@ import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import AuthForm from './AuthForm';
 import axios from 'axios';
+import Button from '@material-ui/core/Button'
+
 
 
 const styles = theme => ({
@@ -41,6 +43,14 @@ class Admin extends React.Component {
     this.setState({ [event.target.name]: event.target.value});
   };
 
+  handleLogout = event => {
+    this.setState(
+      { authorized: false,
+        username: "",
+        password: ""
+      });
+  };
+
   handleSubmit = event => {
     console.log("submitted!", this.state);
     var headers = {
@@ -56,7 +66,7 @@ class Admin extends React.Component {
     .then(res => {
       console.log("res", res);
       if(res.data.authorized){
-        this.setState({authorized: true})
+        this.setState({authorized: true, warning: false})
       } else {
         this.setState({warning: true})
         console.log("not authorized!", this.state)
@@ -74,6 +84,9 @@ class Admin extends React.Component {
       return (
         <div>
           <div>You must be authorized to view this page!</div>
+          {this.state.warning &&
+           <div style={{color: 'red'}} >Wrong username and/or password. Try again.</div>
+          }
           <AuthForm 
             username={this.state.username} 
             password={this.state.password}  
@@ -86,6 +99,13 @@ class Admin extends React.Component {
     }else{
       return (
         <div>
+            <Button 
+            onClick={this.handleLogout} 
+            color="secondary"
+            // label="Logout"
+            // children="Logout"
+            variant="contained"
+            >Logout</Button >
             <Query query={LIST_ENTRIES}>
             {({ loading, error, data }) => {
                 if (loading) return <div>Loading..</div>;
