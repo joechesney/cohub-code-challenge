@@ -64,12 +64,10 @@ class Admin extends React.Component {
       }, 
       {headers: headers})
     .then(res => {
-      console.log("res", res);
       if(res.data.authorized){
         this.setState({authorized: true, warning: false})
       } else {
         this.setState({warning: true})
-        console.log("not authorized!", this.state)
       }
       // tell user whether their form was successfully submitted or not
     });
@@ -93,27 +91,24 @@ class Admin extends React.Component {
             onClick={this.handleSubmit}
             onChange={this.handleChange}
           />
-
         </div>
       )
     }else{
       return (
         <div>
             <Button 
-            onClick={this.handleLogout} 
-            color="secondary"
-            // label="Logout"
-            // children="Logout"
-            variant="contained"
+              onClick={this.handleLogout} 
+              color="secondary"
+              variant="contained"
             >Logout</Button >
             <Query query={LIST_ENTRIES}>
-            {({ loading, error, data }) => {
-                if (loading) return <div>Loading..</div>;
-                if (error) return `Error! ${error.message}`;
-                console.log("entries", data.entries);
-                return <EntriesTable entries={data.entries}/>
+              {({ loading, error, data }) => {
+                  if (loading) return <div>Loading..</div>;
+                  if (error) return `Error! ${error.message}`;
+                  console.log("entries", data.entries);
+                  return <EntriesTable entries={data.entries}/>
+                }
               }
-            }
             </Query>
         </div>
       );

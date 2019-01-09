@@ -48,20 +48,12 @@ class Questionnaire extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState){
-    if(this.state !== prevState){
-      console.log("App state", this.state);
-    }
-  }
-
   handleChange = event => {
-    console.log("state changed");
     this.setState({ [event.target.name]: event.target.value});
   };
 
   handleSubmit = event => {
-    console.log("submitted!", this.state);
-    var headers = {
+    const headers = {
       "Content-Type": "application/json"
     }
     axios.post(`http://localhost:3000/questionnaire`, this.state, {headers: headers})
@@ -112,7 +104,6 @@ class Questionnaire extends React.Component {
                       faveLanguage={this.state.faveLanguage}
                       handleChange={this.handleChange}
                     />
-
                   </div>
                 );
               else if (question.field_type === "list" && question.multiselect === true)
@@ -128,22 +119,22 @@ class Questionnaire extends React.Component {
                 );
             });
             return (
-                <form className={classes.container} noValidate autoComplete="off">
-                <ul>
-                  <div>
-                  <FullName 
-                  handleChange={this.handleChange}
-                  fullName={this.state.fullName}
-                  label={"What is your full name?"}
-                  />
-                  </div>
-                  {questions}
-                  <SubmitButton
-                      onClick={this.handleSubmit}
-                  />
-                </ul>
-                </form>
-                )
+              <form className={classes.container} noValidate autoComplete="off">
+              <ul>
+                <div>
+                <FullName 
+                handleChange={this.handleChange}
+                fullName={this.state.fullName}
+                label={"What is your full name?"}
+                />
+                </div>
+                {questions}
+                <SubmitButton
+                    onClick={this.handleSubmit}
+                />
+              </ul>
+              </form>
+            )
           }}
         </Query>
       </div>
