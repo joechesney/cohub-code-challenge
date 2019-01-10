@@ -5,7 +5,7 @@
     "node": "9.1.0",
     "ruby": "2.4.2",
     "yarn": "1.13.0",
-    "npm": "5.5.1"
+    "npm": "6.5.0"
   },
   "dependencies": {
     "@material-ui/core": "^3.6.2",
