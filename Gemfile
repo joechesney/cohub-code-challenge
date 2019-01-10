@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
-node "9.1.0"
-npm "5.5.1"
+
 ruby "2.4.2", :patchlevel => "198"
 
 git_source(:github) do |repo_name|
