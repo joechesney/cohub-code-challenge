@@ -1,6 +1,12 @@
 {
   "name": "cohub-code-challenge",
   "private": true,
+  "engines": {
+    "node": "9.1.0",
+    "ruby": "2.4.2",
+    "yarn": "1.13.0",
+    "npm": "5.5.1"
+  },
   "dependencies": {
     "@material-ui/core": "^3.6.2",
     "@material-ui/icons": "^3.0.1",

@@ -73,8 +73,6 @@ class Admin extends React.Component {
     });
 }
 
-
-
   render() {
     const { classes } = this.props;
     const { languages } = this.props;

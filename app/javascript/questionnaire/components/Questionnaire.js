@@ -10,6 +10,7 @@ import FullName from "./FullName.js";
 import SubmitButton from './SubmitButton.js';
 import { withStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import SuccessfulSubmission from './SuccessfulSubmission';
 
 const styles = theme => ({
     container: {
@@ -42,28 +43,63 @@ class Questionnaire extends React.Component {
       otherFaveLanguages: [],
       fullName: '',
       yearsOfExperience: '',
-      isGoodDev: ""
+      isGoodDev: '',
+      submitted: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.openSuccessfulSubmission = this.openSuccessfulSubmission.bind(this);
   }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value});
   };
 
-  handleSubmit = event => {
-    const headers = {
-      "Content-Type": "application/json"
-    }
-    axios.post(`http://localhost:3000/questionnaire`, this.state, {headers: headers})
-    .then(res => {
-      // tell user whether their form was successfully submitted or not
+  openSuccessfulSubmission = () => {
+    this.setState({
+      faveLanguage: '',
+      otherFaveLanguages: [],
+      fullName: '',
+      yearsOfExperience: '',
+      isGoodDev: '',
+      submitted: true
     })
+  }
+
+  closeSuccessfulSubmission = () => {
+    this.setState({submitted: false})
+  }
+
+  handleSubmit = event => {
+    if( this.state.faveLanguage !== '' &&
+        this.state.fullName !== '' &&
+        this.state.yearsOfExperience !== '' &&
+        this.state.isGoodDev !== '' &&
+        this.state.otherFaveLanguages.length !== 0){
+
+          const headers = {
+            "Content-Type": "application/json"
+          }
+          axios.post(`http://localhost:3000/questionnaire`, this.state, {headers: headers})
+          .then(res => {
+            // tell user whether their form was successfully submitted or not
+            console.log("res", res)
+            if(res.status === 200){
+              this.openSuccessfulSubmission()
+            } else {
+              console.log("there was an error submitting form")
+            }
+          }).catch(error =>{
+            console.log(error.response)
+          })
+    } else {
+      
+    }
   }
 
   render() {
     const { classes } = this.props;
+    if(!this.state.submitted){
     return (
       <div>
         <CssBaseline />
@@ -80,6 +116,7 @@ class Questionnaire extends React.Component {
                       label={question.label}
                       yearsOfExperience={this.state.yearsOfExperience}
                       handleChange={this.handleChange}
+                      required
                     />
                   </div>
                 );
@@ -91,6 +128,7 @@ class Questionnaire extends React.Component {
                       label={question.label}
                       isGoodDev={this.state.isGoodDev}
                       handleChange={this.handleChange}
+                      required
                     />
                   </div>
                 );
@@ -130,7 +168,7 @@ class Questionnaire extends React.Component {
                 </div>
                 {questions}
                 <SubmitButton
-                    onClick={this.handleSubmit}
+                  onClick={this.handleSubmit}
                 />
               </ul>
               </form>
@@ -139,6 +177,14 @@ class Questionnaire extends React.Component {
         </Query>
       </div>
     );
+    } else {
+      return (
+        <SuccessfulSubmission 
+        submitted={this.state.submitted}
+        onClose={this.closeSuccessfulSubmission} 
+        />
+      )
+    }
   }
 }
 

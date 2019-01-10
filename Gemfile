@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
+node "9.1.0"
+npm "5.5.1"
+ruby "2.4.2", :patchlevel => "198"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -16,7 +19,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
-  gem 'sqlite3'
+  gem 'pg'
 end
 
 group :development do
