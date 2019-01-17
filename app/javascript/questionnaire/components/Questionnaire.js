@@ -80,7 +80,7 @@ class Questionnaire extends React.Component {
           const headers = {
             "Content-Type": "application/json"
           }
-          axios.post(`http://localhost:3000/questionnaire`, this.state, {headers: headers})
+          axios.post(`https://hidden-bayou-94466.herokuapp.com/questionnaire`, this.state, {headers: headers})
           .then(res => {
             // tell user whether their form was successfully submitted or not
             console.log("res", res)

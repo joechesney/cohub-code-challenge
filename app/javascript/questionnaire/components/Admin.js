@@ -57,7 +57,7 @@ class Admin extends React.Component {
       "Content-Type": "application/json"
     }
     axios.post(
-      `http://localhost:3000/admin`, 
+      `https://hidden-bayou-94466.herokuapp.com/admin`, 
       {
         username: this.state.username,
         password: this.state.password
