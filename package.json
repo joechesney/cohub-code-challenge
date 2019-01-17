@@ -6,6 +6,9 @@
     "yarn": "1.13.0",
     "npm": "6.5.0"
   },
+  "scripts":{
+    "start": "rails s"
+  },
   "dependencies": {
     "@material-ui/core": "^3.6.2",
     "@material-ui/icons": "^3.0.1",
