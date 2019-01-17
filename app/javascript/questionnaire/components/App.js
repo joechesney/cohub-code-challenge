@@ -11,7 +11,7 @@ export default class App extends React.Component {
   
   componentDidUpdate(prevProps, prevState){
     if(this.state !== prevState){
-      console.log("App state", this.state);
+      // console.log("App state", this.state);
     }
   }
 

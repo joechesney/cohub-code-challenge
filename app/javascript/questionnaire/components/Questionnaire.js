@@ -83,7 +83,6 @@ class Questionnaire extends React.Component {
           axios.post(`https://hidden-bayou-94466.herokuapp.com/questionnaire`, this.state, {headers: headers})
           .then(res => {
             // tell user whether their form was successfully submitted or not
-            console.log("res", res)
             if(res.status === 200){
               this.openSuccessfulSubmission()
             } else {

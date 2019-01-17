@@ -52,7 +52,6 @@ class Admin extends React.Component {
   };
 
   handleSubmit = event => {
-    console.log("submitted!", this.state);
     var headers = {
       "Content-Type": "application/json"
     }
@@ -103,7 +102,6 @@ class Admin extends React.Component {
               {({ loading, error, data }) => {
                   if (loading) return <div>Loading..</div>;
                   if (error) return `Error! ${error.message}`;
-                  console.log("entries", data.entries);
                   return <EntriesTable entries={data.entries}/>
                 }
               }
