@@ -28,8 +28,14 @@ class QuestionnaireController < ApplicationController
       puts @entry.updated_at
       @entry.save
 
+      if @entry.save === false
+        respond_to do |format|
+          format.html { render json: {errors: @entry.errors.full_messages}}
+        end
+      end
+
       respond_to do |format|
-        format.html { render json: {success: true} }
+        format.html { render json: { save_status: @entry.save} }
       end
 
       # This does not work properly. I'm not familiar with Ruby error handling
