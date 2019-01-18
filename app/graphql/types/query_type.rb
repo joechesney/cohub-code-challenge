@@ -10,7 +10,7 @@ Types::QueryType = GraphQL::ObjectType.define do
 
   field :ListEntries, types[Types::Entry] do
     description 'Returns a list of entries'
-    # resolve ->(_, _, _) { Entry.order(position: :asc) }
-    resolve ->(_, _, _) { Entry.all }
+    resolve ->(_, _, _) { Entry.order(id: :asc) }
+    # resolve ->(_, _, _) { Entry.all }
   end
 end
